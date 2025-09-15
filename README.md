@@ -20,18 +20,18 @@ Uvicorn: Servidor da API.
 Conda: Gerenciamento do ambiente.
 
 Estrutura de Pastas
-/projeto-boston-housing
-├── data/
-│    └── processed
-│    └── raw
-│       └── boston_housing.csv
-├── src/
-│   ├── model_training.py
-│   └── api.py
-├── models/
-│   └── trained_model.pkl
-├── environment.yml
-└── README.md
+    /projeto-boston-housing
+    ├── data/
+    │    └── processed
+    │    └── raw
+    │       └── boston_housing.csv
+    ├── src/
+    │   ├── model_training.py
+    │   └── api.py
+    ├── models/
+    │   └── trained_model.pkl
+    ├── environment.yml
+    └── README.md
 
 1.0 - Pré-requisitos: Certifique-se de ter o Conda instalado na sua máquina.
 
@@ -53,30 +53,30 @@ uvicorn src.api:app --reload
 
 Afim de facilitar o entendimento há abaixo uma lista que descreve o signficado de cada sigla no Dataframe
 
-    - CRIM: Taxa de criminalidade por cidade.
+- CRIM: Taxa de criminalidade por cidade.
 
-    - ZN: Proporção de terrenos residenciais zoneados para lotes com mais de 25.000 pés quadrados.
+- ZN: Proporção de terrenos residenciais zoneados para lotes com mais de 25.000 pés quadrados.
 
-    - INDUS: Proporção de acres de negócios não-varejo por cidade.
+- INDUS: Proporção de acres de negócios não-varejo por cidade.
 
-    - CHAS: Variável dummy do Charles River (1 se o terreno margeia o rio; 0 caso contrário).
+- CHAS: Variável dummy do Charles River (1 se o terreno margeia o rio; 0 caso contrário).
 
-    - NOX: Concentração de óxidos nítricos (partes por 10 milhões).
+- NOX: Concentração de óxidos nítricos (partes por 10 milhões).
 
-    - RM: Número médio de quartos por residência.
+- RM: Número médio de quartos por residência.
 
-    - AGE: Proporção de unidades ocupadas por proprietários construídas antes de 1940.
+- AGE: Proporção de unidades ocupadas por proprietários construídas antes de 1940.
 
-    - DIS: Distâncias ponderadas até cinco centros de empregos em Boston.
+- DIS: Distâncias ponderadas até cinco centros de empregos em Boston.
 
-    - RAD: Índice de acessibilidade a rodovias radiais.
+- RAD: Índice de acessibilidade a rodovias radiais.
 
-    - TAX: Taxa de imposto sobre a propriedade de valor total por 10.000 dólares.
+- TAX: Taxa de imposto sobre a propriedade de valor total por 10.000 dólares.
 
-    - PTRATIO: Relação aluno-professor por cidade.
+- PTRATIO: Relação aluno-professor por cidade.
 
-    - B: 1000(Bk - 0.63)^2, onde Bk é a proporção de negros por cidade. (Essa é a variável com questões éticas).
+- B: 1000(Bk - 0.63)^2, onde Bk é a proporção de negros por cidade. (Essa é a variável com questões éticas).
 
-    - LSTAT: % de status inferior da população.
+- LSTAT: % de status inferior da população.
 
-    - MEDV: Valor médio das casas ocupadas pelos proprietários em 1.000 dólares(Var Alvo)
+- MEDV: Valor médio das casas ocupadas pelos proprietários em 1.000 dólares(Var Alvo)
