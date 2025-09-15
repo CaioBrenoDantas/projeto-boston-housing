@@ -75,7 +75,7 @@ Afim de facilitar o entendimento há abaixo uma lista que descreve o signficado 
 
     - PTRATIO: Relação aluno-professor por cidade.
 
-    - B: 1000(Bk - 0.63)^2, onde Bk é a proporção de negros por cidade. (Essa é a variável com questões éticas que mencionamos anteriormente).
+    - B: 1000(Bk - 0.63)^2, onde Bk é a proporção de negros por cidade. (Essa é a variável com questões éticas).
 
     - LSTAT: % de status inferior da população.
 
