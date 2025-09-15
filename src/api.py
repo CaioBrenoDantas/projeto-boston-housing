@@ -24,6 +24,20 @@ try :
     modelo =joblib.load('../models/trained_model.pkl')
 except FileNotFoundError:
     modelo =joblib.load('models/trained_model.pkl')
+    
+    
+try:
+    caminho_arquivo = '../data/raw/HousingData.csv'
+    df = pd.read_csv(caminho_arquivo)
+except FileNotFoundError:
+    caminho_arquivo = 'data/raw/HousingData.csv'
+    df = pd.read_csv(caminho_arquivo)
+
+preencher_null = {'CRIM':df['CRIM'].median(),'ZN': df['ZN'].median()
+                  ,'INDUS': df['INDUS'].median(),'CHAS': df['CHAS'].median()
+                  ,'AGE': df['AGE'].median(),'LSTAT': df['LSTAT'].median()}
+
+df = df.fillna(preencher_null)
 
 @app.get('/')
 def ola_mundo():
@@ -42,5 +56,11 @@ async def predict_house_price(data:house_features):
     previsao = modelo.predict(feature_list)[0]
     
     return {'Previsão': previsao}
+
+@app.get('/info')
+async def get_data_info():
+    insights = df.describe().to_dict()
+    return insights
+    
     
 
