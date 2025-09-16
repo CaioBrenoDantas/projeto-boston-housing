@@ -17,9 +17,11 @@ df = df.drop('B',axis=1)
 print(df.isnull().sum())
 df_limpo = df.fillna(df.median(numeric_only=True))
 try:
-    df_limpo.to_csv('../data/processed/HousingData.csv')
+    caminho_arquivo ='../data/processed/HousingData.csv'
+    df_limpo.to_csv(caminho_arquivo,index=False)
 except:
-    df_limpo.to_csv('data/processed/HousingData.csv')
+    caminho_arquivo ='data/processed/HousingData.csv'
+    df_limpo.to_csv(caminho_arquivo,index=False)
 print(df_limpo.isnull().sum())
 
 correlacao = df_limpo.corr(method='pearson')

@@ -51,7 +51,7 @@ async def predict_house_price(data:house_features):
     
     previsao = modelo.predict(feature_list)[0]
     
-    return {'Previsão': previsao}
+    return {'Previsão(milhares de dólares)': round(previsao,5)}
 
 @app.get('/info')
 async def get_data_info():
@@ -62,7 +62,7 @@ async def get_data_info():
 async def get_correlation():
     
     correlacao = df.corr(method="pearson")
-    plt.figure(figsize=(12,8))
+    plt.figure(figsize=(10,6))
     sns.heatmap(correlacao,annot=True,cmap='coolwarm',fmt='.2f')
     plt.title('Matriz de correlação de Peasorn dos variáveis do Dataframe')
     
