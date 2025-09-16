@@ -8,6 +8,7 @@
 # Ignorar arquivos temporários do Python
 __pycache__/
 *.pyc
+tempCodeRunnerFile*
 
 # Ignorar o modelo gerado
 /models/
