@@ -5,13 +5,13 @@
 # Ignorar o ambiente virtual do Conda
 /projeto-boston-housing/
 
-# Ignorar arquivos temporários do Python
+# Ignorar o modelo gerado pelo script
+/models/trained_model.pkl
+
+# Ignorar o cache do Python
 __pycache__/
 *.pyc
 tempCodeRunnerFile*
 
-# Ignorar o modelo gerado
-/models/
-
 # Ignorar os dados processados gerados
-/data/processed/
+/data/processed/HousingData.csv
