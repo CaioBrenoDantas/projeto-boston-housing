@@ -12,22 +12,24 @@ try:
 except FileNotFoundError:
     caminho_arquivo = 'data/raw/HousingData.csv'
     df = pd.read_csv(caminho_arquivo)
-
+# A variável 'B' foi removida do modelo por questões éticas
+df = df.drop('B',axis=1)
 print(df.isnull().sum())
-preencher_null = {'CRIM':df['CRIM'].median(),'ZN': df['ZN'].median()
-                  ,'INDUS': df['INDUS'].median(),'CHAS': df['CHAS'].median()
-                  ,'AGE': df['AGE'].median(),'LSTAT': df['LSTAT'].median()}
-df = df.fillna(preencher_null)
-print(df.isnull().sum())
+df_limpo = df.fillna(df.median(numeric_only=True))
+try:
+    df_limpo.to_csv('../data/processed/HousingData.csv')
+except:
+    df_limpo.to_csv('data/processed/HousingData.csv')
+print(df_limpo.isnull().sum())
 
-correlacao = df.corr(method='pearson')
+correlacao = df_limpo.corr(method='pearson')
 plt.figure(figsize=(12,10))
 sns.heatmap(correlacao,annot=True,cmap='coolwarm',fmt='.2f')
 plt.title('Matriz de correlação das variáveis')
 plt.show()
 
-X = df.drop('MEDV',axis=1)
-y = df['MEDV']
+X = df_limpo.drop('MEDV',axis=1)
+y = df_limpo['MEDV']
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.3,random_state=42)
 
 modelo = LinearRegression()

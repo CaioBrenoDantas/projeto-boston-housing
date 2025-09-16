@@ -22,14 +22,15 @@ Conda: Gerenciamento do ambiente.
 Estrutura de Pastas
     /projeto-boston-housing
     ├── data/
-    │    └── processed
-    │    └── raw
-    │       └── boston_housing.csv
-    ├── src/
-    │   ├── model_training.py
-    │   └── api.py
+    │   ├── processed/
+    │   ├── raw/
+    │   │   └── HousingData.csv
     ├── models/
     │   └── trained_model.pkl
+    ├── src/
+    │   ├── api.py
+    │   └── model_training.py
+    ├── .gitignore
     ├── environment.yml
     └── README.md
 
@@ -75,7 +76,7 @@ Afim de facilitar o entendimento há abaixo uma lista que descreve o signficado 
 
 - PTRATIO: Relação aluno-professor por cidade.
 
-- B: 1000(Bk - 0.63)^2, onde Bk é a proporção de negros por cidade. (Essa é a variável com questões éticas).
+- B: 1000(Bk - 0.63)^2, onde Bk é a proporção de negros por cidade. (Essa é uma variável com questões éticas).
 
 - LSTAT: % de status inferior da população.
 

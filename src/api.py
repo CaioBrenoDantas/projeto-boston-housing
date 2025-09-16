@@ -1,7 +1,11 @@
 import joblib
 from fastapi import FastAPI
+from fastapi.responses import StreamingResponse
 import pandas as pd
 from pydantic import BaseModel
+import seaborn as sns
+import matplotlib.pyplot as plt
+import io
 
 app = FastAPI()
 
@@ -17,7 +21,6 @@ class house_features(BaseModel):
     RAD: float
     TAX: float
     PTRATIO: float
-    B: float
     LSTAT: float
 
 try :    
@@ -27,17 +30,11 @@ except FileNotFoundError:
     
     
 try:
-    caminho_arquivo = '../data/raw/HousingData.csv'
+    caminho_arquivo = '../data/processed/HousingData.csv'
     df = pd.read_csv(caminho_arquivo)
 except FileNotFoundError:
-    caminho_arquivo = 'data/raw/HousingData.csv'
+    caminho_arquivo = 'data/processed/HousingData.csv'
     df = pd.read_csv(caminho_arquivo)
-
-preencher_null = {'CRIM':df['CRIM'].median(),'ZN': df['ZN'].median()
-                  ,'INDUS': df['INDUS'].median(),'CHAS': df['CHAS'].median()
-                  ,'AGE': df['AGE'].median(),'LSTAT': df['LSTAT'].median()}
-
-df = df.fillna(preencher_null)
 
 @app.get('/')
 def ola_mundo():
@@ -50,8 +47,7 @@ async def predict_house_price(data:house_features):
     
     feature_list = [[input_data['CRIM'], input_data['ZN'], input_data['INDUS'], input_data['CHAS'],
                     input_data['NOX'], input_data['RM'], input_data['AGE'], input_data['DIS'],
-                    input_data['RAD'], input_data['TAX'], input_data['PTRATIO'], input_data['B'],
-                    input_data['LSTAT']]]
+                    input_data['RAD'], input_data['TAX'], input_data['PTRATIO'],input_data['LSTAT']]]
     
     previsao = modelo.predict(feature_list)[0]
     
@@ -62,5 +58,18 @@ async def get_data_info():
     insights = df.describe().to_dict()
     return insights
     
+@app.get('/correlation')
+async def get_correlation():
     
+    correlacao = df.corr(method="pearson")
+    plt.figure(figsize=(12,8))
+    sns.heatmap(correlacao,annot=True,cmap='coolwarm',fmt='.2f')
+    plt.title('Matriz de correlação de Peasorn dos variáveis do Dataframe')
+    
+    buffer = io.BytesIO()
+    plt.savefig(buffer,format='png')
+    buffer.seek(0)
+    plt.close()
+    
+    return StreamingResponse(buffer,media_type='image/png')
 
